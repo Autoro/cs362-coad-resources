@@ -18,12 +18,26 @@ git clone git@github.com:YOURFORK/cs362-coad-resources.git
 
 This is a Rails application that uses SQLite in development and PostgreSQL in production.
 
+Make sure you are using Ruby 2.7, eg using RVM:
+```
+rvm install ruby-2.7.2
+rvm use ruby-2.7.2
+```
+
+Ensure that NodeJS is currently installed:
+```
+sudo apt-get install nodejs
+```
+
 Install the dependencies:
 
 ```
 gem install bundler
 bundle install
 ```
+
+Now, create a copy of .env.example and rename it to .env.
+Change DEFAULT_PASSWORD, ADMINS, TEST_USER_EMAIL, and TEST_USER_PASSWORD values to appropriate values.
 
 Next, set up the database:
 
