@@ -1,3 +1,4 @@
+# A ticket that can be claimed by an organization.
 class Ticket < ApplicationRecord
 
   belongs_to :region

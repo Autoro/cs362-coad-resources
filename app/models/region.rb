@@ -1,3 +1,4 @@
+# A physical region where tickets can be opened.
 class Region < ApplicationRecord
 
   has_many :tickets

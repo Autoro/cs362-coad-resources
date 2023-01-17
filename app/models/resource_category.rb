@@ -1,3 +1,4 @@
+# A resource category representing the type of help that is being asked for in a ticket.
 class ResourceCategory < ApplicationRecord
 
   has_and_belongs_to_many :organizations

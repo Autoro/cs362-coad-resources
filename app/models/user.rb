@@ -1,3 +1,4 @@
+# A user of the application. Can be either an admin or an organization user.
 class User < ApplicationRecord
 
   enum role: [:admin, :organization]
