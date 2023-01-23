@@ -10,4 +10,6 @@ RSpec.describe User, type: :model do
     it "has a role" do
         expect(user).to respond_to(:role)
     end
+    
+    it { should belong_to(:organization).optional } 
 end
