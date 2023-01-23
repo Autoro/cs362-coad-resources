@@ -10,4 +10,8 @@ RSpec.describe ResourceCategory, type: :model do
     it "has an active" do
         expect(resource_category).to respond_to(:active)
     end
+
+    it { should have_and_belong_to_many :organizations }
+
+    it { should have_many :tickets }
 end
