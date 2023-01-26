@@ -1,17 +1,19 @@
 require 'rails_helper'
 
 RSpec.describe Region, type: :model do
-
-  it "exists" do
-    Region.new
-  end
+  let(:region) { Region.new }
 
   it "has a name" do
-    region = Region.new
     expect(region).to respond_to(:name)
   end
 
-  it { should have_many :tickets }
+  it { should have_many(:tickets) }
+
+  it { should validate_presence_of(:name) }
+
+  it { should validate_length_of(:name).is_at_least(1).is_at_most(255).on(:create) }
+
+  it { should validate_uniqueness_of(:name).case_insensitive }
 
   it "has a string representation that is its name" do
     name = 'Mt. Hood'
