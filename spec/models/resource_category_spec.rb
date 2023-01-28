@@ -31,6 +31,10 @@ RSpec.describe ResourceCategory, type: :model do
         expect(resource_category.to_s).to eq(name)
     end
 
+    it "returns a ResourceCategory with the name 'Unspecified'" do
+        expect(ResourceCategory.unspecified.name).to eq("Unspecified")
+    end
+
     it { should have_and_belong_to_many(:organizations) }
 
     it { should have_many(:tickets) }
