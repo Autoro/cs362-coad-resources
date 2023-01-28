@@ -83,6 +83,28 @@ RSpec.describe Organization, type: :model do
         expect(organization).to respond_to(:agreement_eight)
     end
 
+    it "changes its status to approved" do
+        organization.approve
+        expect(organization.approved?).to be_truthy
+    end
+
+    it "changes its status to rejected" do
+        organization.reject
+        expect(organization.rejected?).to be_truthy
+    end
+
+    it "sets a default status if one does not exist" do
+        organization.status = nil
+        organization.set_default_status
+        expect(organization.status).to_not be_nil
+    end
+
+    it "returns its name as a string" do
+        name = "Test"
+        organization.name = name
+        expect(organization.to_s).to eq(name)
+    end
+
     it { should have_many(:users) }
 
     it { should have_many(:tickets) }
