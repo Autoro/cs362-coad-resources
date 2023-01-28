@@ -11,6 +11,26 @@ RSpec.describe ResourceCategory, type: :model do
         expect(resource_category).to respond_to(:active)
     end
 
+    it "is activatable" do
+        resource_category.activate
+        expect(resource_category).to_not be_inactive
+    end
+
+    it "is deactivatable" do
+        resource_category.deactivate
+        expect(resource_category).to be_inactive
+    end
+
+    it "returns its current status" do
+        expect(resource_category.inactive?).to_not be_nil
+    end
+
+    it "returns its name as a string" do
+        name = "Test"
+        resource_category.name = name
+        expect(resource_category.to_s).to eq(name)
+    end
+
     it { should have_and_belong_to_many(:organizations) }
 
     it { should have_many(:tickets) }
