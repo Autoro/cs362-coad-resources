@@ -10,6 +10,17 @@ RSpec.describe User, type: :model do
     it "has a role" do
         expect(user).to respond_to(:role)
     end
+
+    it "sets a default role if one does not exist" do
+        user.role = nil
+        user.set_default_role
+        expect(user.role).to_not be_nil
+    end
+    it "returns its email as a string" do
+        email = "Test"
+        user.email = email
+        expect(user.to_s).to eq(email)
+    end
     
     it { should belong_to(:organization).optional }
 
