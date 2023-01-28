@@ -24,6 +24,19 @@ RSpec.describe Ticket, type: :model do
         expect(ticket).to respond_to(:closed_at)
     end
 
+    it "returns whether or not it's open" do
+        expect(ticket.open?).to_not be_nil
+    end
+
+    it "returns whether or not it's captured" do
+        expect(ticket.captured?).to_not be_nil
+    end
+
+    it "returns a string with its id" do
+        ticket.id = 1234
+        expect(ticket.to_s).to eq("Ticket 1234")
+    end
+
     it { should belong_to(:region) }
 
     it { should belong_to(:resource_category) }
