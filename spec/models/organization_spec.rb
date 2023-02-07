@@ -99,7 +99,7 @@ RSpec.describe Organization, type: :model do
     end
 
     it "returns its name as a string" do
-        expect(organization.to_s).to eq("Test Company")
+        expect(organization.to_s).to eq(organization.name)
     end
 
     it { should have_many(:users) }

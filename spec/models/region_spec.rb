@@ -8,7 +8,7 @@ RSpec.describe Region, type: :model do
   end
 
   it "returns its name as a string" do
-    expect(region.to_s).to eq("Test Region")
+    expect(region.to_s).to eq(region.name)
   end
 
   it "returns a Region with the name 'Unspecified'" do

@@ -16,7 +16,7 @@ RSpec.describe User, type: :model do
         expect(user.role).to_not be_nil
     end
     it "returns its email as a string" do
-        expect(user.to_s).to eq("test@test.com")
+        expect(user.to_s).to eq(user.email)
     end
     
     it { should belong_to(:organization).optional }

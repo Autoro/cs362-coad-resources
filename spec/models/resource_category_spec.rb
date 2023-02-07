@@ -28,7 +28,7 @@ RSpec.describe ResourceCategory, type: :model do
     end
 
     it "returns its name as a string" do
-        expect(resource_category.to_s).to eq("Test Category")
+        expect(resource_category.to_s).to eq(resource_category.name)
     end
 
     it "returns a ResourceCategory with the name 'Unspecified'" do

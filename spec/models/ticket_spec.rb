@@ -39,7 +39,7 @@ RSpec.describe Ticket, type: :model do
     end
 
     it "returns a string with its id" do
-        expect(ticket.to_s).to eq("Ticket 1")
+        expect(ticket.to_s).to eq("Ticket " + ticket.id.to_s)
     end
 
     it "returns a set of open tickets not belonging to an organization" do
