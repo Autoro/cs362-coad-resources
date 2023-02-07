@@ -2,7 +2,13 @@ require 'rails_helper'
 include TicketsHelper
 
 RSpec.describe Ticket, type: :model do
-    let(:ticket) { Ticket.new }
+    let(:ticket) { build_stubbed(:ticket, id: 1) }
+    let(:region) { create(:region) }
+    let(:organization) { create(:organization) }
+    let(:resource_category) { create(:resource_category) }
+    let(:open_ticket) { create(:ticket, resource_category: resource_category, region: region) }
+    let(:open_organization_ticket) { create(:ticket, resource_category: resource_category, region: region, organization: organization) }
+    let(:closed_organization_ticket) { create(:ticket, closed: true, resource_category: resource_category, region: region, organization: organization) }
 
     it "has a name" do
         expect(ticket).to respond_to(:name)
@@ -33,8 +39,35 @@ RSpec.describe Ticket, type: :model do
     end
 
     it "returns a string with its id" do
-        ticket.id = 1234
-        expect(ticket.to_s).to eq("Ticket 1234")
+        expect(ticket.to_s).to eq("Ticket 1")
+    end
+
+    it "returns a set of open tickets not belonging to an organization" do
+        expect(Ticket.open).to include(open_ticket)
+    end
+
+    it "returns a set of closed tickets" do
+        expect(Ticket.closed).to include(closed_organization_ticket)
+    end
+
+    it "returns a set of open tickets belonging to an organization" do
+        expect(Ticket.all_organization).to include(open_organization_ticket)
+    end
+
+    it "returns a set of open tickets belonging to a specific organiation" do
+        expect(Ticket.organization 1).to include(open_organization_ticket)
+    end
+
+    it "returns a set of closed tickets belonging to a specific organization" do
+        expect(Ticket.closed_organization 1).to include(closed_organization_ticket)
+    end
+
+    it "returns a set of tickets belonging to a specific region" do
+        expect(Ticket.region 1).to include(open_ticket)
+    end
+
+    it "returns a set of tickets belonging to a specific resource category" do
+        expect(Ticket.resource_category 1).to include(open_ticket)
     end
 
     it { should belong_to(:region) }
