@@ -1,7 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe ResourceCategory, type: :model do
-    let(:resource_category) { ResourceCategory.new }
+    let(:resource_category) { build_stubbed(:resource_category) }
+    let(:active_resource_category) { create(:resource_category, active: true) }
+    let(:inactive_resource_category) { create(:resource_category, active: false) }
 
     it "has a name" do
         expect(resource_category).to respond_to(:name)
@@ -12,13 +14,13 @@ RSpec.describe ResourceCategory, type: :model do
     end
 
     it "is activatable" do
-        resource_category.activate
-        expect(resource_category).to_not be_inactive
+        inactive_resource_category.activate
+        expect(inactive_resource_category).to_not be_inactive
     end
 
     it "is deactivatable" do
-        resource_category.deactivate
-        expect(resource_category).to be_inactive
+        active_resource_category.deactivate
+        expect(active_resource_category).to be_inactive
     end
 
     it "returns its current status" do
@@ -26,13 +28,19 @@ RSpec.describe ResourceCategory, type: :model do
     end
 
     it "returns its name as a string" do
-        name = "Test"
-        resource_category.name = name
-        expect(resource_category.to_s).to eq(name)
+        expect(resource_category.to_s).to eq("Test Category")
     end
 
     it "returns a ResourceCategory with the name 'Unspecified'" do
         expect(ResourceCategory.unspecified.name).to eq("Unspecified")
+    end
+
+    it "returns a set of active resource categories" do
+        expect(ResourceCategory.active).to include(active_resource_category)
+    end
+
+    it "returns a set of inactive resource categories" do
+        expect(ResourceCategory.inactive).to include(inactive_resource_category)
     end
 
     it { should have_and_belong_to_many(:organizations) }
