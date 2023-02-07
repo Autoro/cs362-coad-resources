@@ -1,16 +1,14 @@
 require 'rails_helper'
 
 RSpec.describe Region, type: :model do
-  let(:region) { Region.new }
+  let(:region) { build_stubbed(:region) }
 
   it "has a name" do
     expect(region).to respond_to(:name)
   end
 
   it "returns its name as a string" do
-    name = "Mt. Hood"
-    region.name = name
-    expect(region.to_s).to eq(name)
+    expect(region.to_s).to eq("Test Region")
   end
 
   it "returns a Region with the name 'Unspecified'" do
