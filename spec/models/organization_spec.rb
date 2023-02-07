@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Organization, type: :model do
-    let(:organization) { Organization.new }
+    let(:organization) { build_stubbed(:organization) }
 
     it "has a name" do
         expect(organization).to respond_to(:name)
@@ -94,15 +94,12 @@ RSpec.describe Organization, type: :model do
     end
 
     it "sets a default status if one does not exist" do
-        organization.status = nil
         organization.set_default_status
         expect(organization.status).to_not be_nil
     end
 
     it "returns its name as a string" do
-        name = "Test"
-        organization.name = name
-        expect(organization.to_s).to eq(name)
+        expect(organization.to_s).to eq("Test Company")
     end
 
     it { should have_many(:users) }
