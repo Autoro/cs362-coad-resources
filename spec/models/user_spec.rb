@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
-    let(:user) { User.new }
+    let(:user) { build_stubbed(:user) }
 
     it "has an email" do
         expect(user).to respond_to(:email)
@@ -12,14 +12,11 @@ RSpec.describe User, type: :model do
     end
 
     it "sets a default role if one does not exist" do
-        user.role = nil
         user.set_default_role
         expect(user.role).to_not be_nil
     end
     it "returns its email as a string" do
-        email = "Test"
-        user.email = email
-        expect(user.to_s).to eq(email)
+        expect(user.to_s).to eq("test@test.com")
     end
     
     it { should belong_to(:organization).optional }
