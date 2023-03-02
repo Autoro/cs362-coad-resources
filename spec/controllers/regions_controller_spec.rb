@@ -94,7 +94,7 @@ RSpec.describe RegionsController, type: :controller do
     end
 
     context "as an admin" do
-        let(:admin) { create(:user, :confirmed, :admin) }
+        let(:admin) { create(:user, :admin, :confirmed) }
 
         before(:each) do
             sign_in(admin)
