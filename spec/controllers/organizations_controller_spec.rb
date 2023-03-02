@@ -19,6 +19,11 @@ RSpec.describe OrganizationsController, type: :controller do
             expect(response).to redirect_to(new_user_session_path)
         end
 
+        it "GET edit" do
+            get :edit, params: { id: organization.id }
+            expect(response).to redirect_to(new_user_session_path)
+        end
+
         it "PATCH update" do
             patch :update, params: { id: organization.id, organization: attributes_for(:organization) }
             expect(response).to redirect_to(new_user_session_path)
@@ -26,6 +31,11 @@ RSpec.describe OrganizationsController, type: :controller do
         
         it "PUT update" do
             put :update, params: { id: organization.id, organization: attributes_for(:organization) }
+            expect(response).to redirect_to(new_user_session_path)
+        end
+
+        it "GET show" do
+            get :show, params: { id: organization.id }
             expect(response).to redirect_to(new_user_session_path)
         end
 
@@ -71,6 +81,11 @@ RSpec.describe OrganizationsController, type: :controller do
             expect(response).to render_template(:new)
         end
 
+        it "GET edit" do
+            get :edit, params: { id: organization.id }
+            expect(response).to redirect_to(dashboard_path)
+        end
+
         it "PATCH update" do
             patch :update, params: { id: organization.id, organization: attributes_for(:organization) }
             expect(response).to redirect_to(dashboard_path)
@@ -78,6 +93,11 @@ RSpec.describe OrganizationsController, type: :controller do
 
         it "PUT update" do
             put :update, params: { id: organization.id, organization: attributes_for(:organization) }
+            expect(response).to redirect_to(dashboard_path)
+        end
+
+        it "GET show" do
+            get :show, params: { id: organization.id }
             expect(response).to redirect_to(dashboard_path)
         end
 
@@ -98,6 +118,11 @@ RSpec.describe OrganizationsController, type: :controller do
 
         before(:each) do
             sign_in(user)
+        end
+
+        it "GET edit" do
+            get :edit, params: { id: approved_organization.id }
+            expect(response).to be_successful
         end
 
         it "PATCH update success" do
@@ -123,6 +148,11 @@ RSpec.describe OrganizationsController, type: :controller do
             put :update, params: { id: approved_organization.id, organization: attributes_for(:organization) }
             expect(response).to render_template(:edit)
         end
+
+        it "GET show" do
+            get :show, params: { id: approved_organization.id }
+            expect(response).to be_successful
+        end
     end
 
     context "as an admin" do
@@ -147,6 +177,11 @@ RSpec.describe OrganizationsController, type: :controller do
             expect(response).to redirect_to(dashboard_path)
         end
 
+        it "GET edit" do
+            get :edit, params: { id: organization.id }
+            expect(response).to redirect_to(dashboard_path)
+        end
+
         it "PATCH update" do
             patch :update, params: { id: organization.id, organization: attributes_for(:organization) }
             expect(response).to redirect_to(dashboard_path)
@@ -155,6 +190,11 @@ RSpec.describe OrganizationsController, type: :controller do
         it "PUT update" do
             put :update, params: { id: organization.id, organization: attributes_for(:organization) }
             expect(response).to redirect_to(dashboard_path)
+        end
+
+        it "GET show" do
+            get :show, params: { id: organization.id }
+            expect(response).to be_successful
         end
 
         it "POST approve success" do
