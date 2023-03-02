@@ -10,5 +10,9 @@ FactoryBot.define do
         secondary_phone { "555-555-5555" }
         title { "Title" }
         transportation { "yes" }
+
+        trait :approved do
+            status { :approved }
+        end
     end
 end
