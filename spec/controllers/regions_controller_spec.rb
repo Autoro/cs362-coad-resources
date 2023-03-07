@@ -120,14 +120,28 @@ RSpec.describe RegionsController, type: :controller do
             expect(response).to be_successful
         end
 
-        it "GET create" do
+        it "GET create success" do
             get :create, params: { region: attributes_for(:region) }
             expect(response).to redirect_to(regions_path)
         end
 
-        it "PATCH update" do
+        it "GET create failure" do
+            allow_any_instance_of(Region).to receive(:save).and_return(false)
+
+            get :create, params: { region: attributes_for(:region) }
+            expect(response).to render_template(:new)
+        end
+
+        it "PATCH update success" do
             patch :update, params: { id: region.id, region: attributes_for(:region) }
             expect(response).to redirect_to(region_path(region.id))
+        end
+
+        it "PATCH update failure" do
+            allow_any_instance_of(Region).to receive(:update).and_return(false)
+            
+            patch :update, params: { id: region.id, region: attributes_for(:region) }
+            expect(response).to render_template(:edit)
         end
 
         it "PUT update" do
