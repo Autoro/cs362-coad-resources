@@ -1,6 +1,7 @@
 class TicketsController < ApplicationController
   include TicketsHelper
 
+  before_action :authenticate_user!, except: [:new, :create]
   before_action :authenticate_admin, only: :destroy
 
   def new
